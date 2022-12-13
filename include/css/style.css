@@ -1,0 +1,47 @@
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background: #333;
+    color: white;
+}
+section {
+    background: white;
+    color: black;
+    min-height: 500px;
+    padding-bottom: 20px;
+}
+
+nav .conteneur {
+    display: flex;
+}
+
+nav a {
+    color: white;
+    padding: 5px 15px;
+    text-decoration: none;
+}
+nav a:hover {
+    background: darkorchid;
+}
+
+h1 {
+    margin: 0;
+    padding: 20px 0;
+}
+
+.conteneur {
+    width: 500px;
+    margin: 0 auto;
+}
+
+header {
+    min-height: 100px;
+}
+
+footer {
+    padding-top: 20px;
+    text-align: center;
+}
