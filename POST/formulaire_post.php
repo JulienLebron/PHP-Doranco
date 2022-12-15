@@ -17,17 +17,19 @@
                     echo '<pre>';
                     print_r($_POST);
                     echo '</pre>';
-                    echo '<pre>';
-                    print_r($_GET);
-                    echo '</pre>';
-                    echo '<pre>';
-                    print_r($GLOBALS);
-                    echo '</pre>';
+                    //echo '<pre>';
+                    // print_r($_GET);
+                    // echo '</pre>';
+                    // echo '<pre>';
+                    // print_r($GLOBALS);
+                    // echo '</pre>';
                     // http://localhost/php/POST/formulaire_post.php
                     // ?
                     // pseudo=dopakd
                     // &
                     // email=daz%5Epkdaz
+
+                
 
                 ?>
 

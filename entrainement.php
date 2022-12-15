@@ -896,6 +896,55 @@
             // print_r($_SERVER);
             // echo '</pre>';
 
+            echo '<h2>12 - Class et object</h2>';
+
+
+            class Personnage
+            {
+                // Propriétées
+                public $prenom = 'Arthur';
+                public $nom = 'Pendragon';
+                public $profession = 'Roi';
+                public $pays = 'Bretagne';
+
+                // Méthodes
+                public function changer_prenom($nouveau)
+                {
+                    return $this->prenom = $nouveau;
+                }
+
+                public function changer_nom($nouveau)
+                {
+                    return $this->nom = $nouveau;
+                }
+
+                public function changer_profession($nouveau)
+                {
+                    return $this->profession = $nouveau;
+                }
+            }
+
+            $mon_objet1 = new Personnage;
+
+            // Afficher les propriétés de l'objet : 
+            echo '<pre>';
+            print_r($mon_objet1);
+            echo '</pre>';
+            
+            // Afficher les méthodes de l'objet 
+            echo '<pre>';
+            print_r(get_class_methods($mon_objet1));
+            echo '</pre>';
+
+            // Pour piocher dans l'objet ->
+            echo $mon_objet1->prenom . ' ' . $mon_objet1->nom . '<br>';
+
+            // On appel la méthode pour changer la propriété prenom
+            $mon_objet1->changer_prenom('Fadia');
+            echo $mon_objet1->prenom . ' ' . $mon_objet1->nom .  '<br>';
+            $mon_objet1->changer_profession('Reine');
+            echo $mon_objet1->profession . '<br>';
+
 
             
             
