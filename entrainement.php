@@ -897,6 +897,14 @@
             // echo '</pre>';
 
             echo '<h2>12 - Class et object</h2>';
+            // Un objet est un conteneur virtuel représenté par une variable
+            // Dans un objet on aura un ensemble d'informations (propriétée ou attribut de l'objet) ainsi qu'un ensemble de fonction (méthode de l'objet)
+            // L'intérêt de l'objet est de regrouper des outils liés à un même sujet au même endroit
+            // L'objet PHP est toujours issu d'une class (plan de construction )
+            // Ensuite l'objet aura son existence propre 
+            // Un utilisateur sur un e-commerce aura un objet panier qui ne sera pas le même qu'un autre objet panier d'un autre utilisateur
+            // Construit de la même façon mais ensuite l'objet dépend des actions des utilisateurs
+            // Par convention d'écriture, la première lettre d'une class est en majuscule 
 
 
             class Personnage
@@ -944,6 +952,7 @@
             echo $mon_objet1->prenom . ' ' . $mon_objet1->nom .  '<br>';
             $mon_objet1->changer_profession('Reine');
             echo $mon_objet1->profession . '<br>';
+
 
 
             
