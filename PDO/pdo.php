@@ -150,7 +150,7 @@
     
     while($ligne_en_cours = $resultat->fetch(PDO::FETCH_ASSOC))
     {
-       echo '<div style="background: blue; color: white; padding: 10px; box-sizing: border-box; width: 19%; margin-top: 20px">';
+       echo '<div style="background: steelblue; color: white; padding: 10px; box-sizing: border-box; width: 19%; margin-top: 20px">';
 
             // echo 'Id_employes : ' . $ligne_en_cours['id_employes'] . '<br>';
             // echo 'Prénom : ' . $ligne_en_cours['prenom'] . '<br>';
@@ -168,6 +168,87 @@
        echo '</div>';
     }
     echo '</div>';
+
+    echo '<h2>Query : pour plusieurs lignes de résultat avec fetchAll()</h2>';
+
+    $resultat = $pdo->query("SELECT * FROM employes");
+    
+    $tab_multi = $resultat->fetchAll(PDO::FETCH_ASSOC);
+    
+    echo '<pre>';
+    print_r($tab_multi);
+    echo '</pre>';
+    
+    // Dans un tableau multidimensionnel, on met une succession de crochet [] pour chaque niveau
+    echo $tab_multi[1]['prenom'] . '<br>';
+    
+    echo '<ul>';
+    foreach($tab_multi AS $sous_tableau)
+    {
+        // echo '<pre>'; print_r($sous_tableau); echo '</pre>';
+        echo '<li>' . $sous_tableau['prenom'] . ' ' . $sous_tableau['nom'] . '</li>';
+    }
+    echo '</ul>';
+    
+    echo '<h2>Affichage des employes sous forme de tableau</h2>';
+    $resultat = $pdo->query("SELECT * FROM employes");
+
+    echo '<table style="width: 100%">';
+    // gestion des colonnes 
+    echo '<thead>';
+    echo '<tr>';
+
+    for($i = 0; $i < $resultat->columnCount(); $i++)
+    {
+        $infos_colonne = $resultat->getColumnMeta($i);
+        // echo '<pre>'; print_r($infos_colonne); echo '</pre>';
+        echo '<th style="padding: 5px 10px;">' . $infos_colonne['name'] . '</th>';
+    }
+    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
+
+    // gestion des données du tableau
+    while($ligne = $resultat->fetch(PDO::FETCH_ASSOC))
+    {
+        echo '<tr>';
+        foreach($ligne AS $valeur)
+        {
+            echo '<td style="padding: 5px 10px;">'. $valeur . '</td>';
+        }
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
+
+    echo '<h2>Requête préparée avec prepare(), bindParam() et execute()</h2>';
+    // Si dans la requête, une information provient d'un utilisateur ($_GET ou $_POST), il est possible que l'utilisateur fasse une injection SQL
+    // Pour se protéger contre les injections SQL : il faut utiliser prepare()
+    $service = 'informatique';
+    
+    
+    // avec query
+    $resultat = $pdo->query('SELECT * FROM employes WHERE service = "' . $service . '"');
+    
+    // avec prepare()
+    $service = 'Web'; 
+
+    // on prepare la requete et on représente l'information attendue par un marqueur nominatif
+    // prepare va nous proteger contre les attaques SQL (95% des problème de sécurité sur le web)
+    $resultat = $pdo->prepare('SELECT * FROM employes WHERE service = :marqueur'); 
+    // :marqueur est un marqueur nominatif
+    $resultat->bindParam(':marqueur', $service, PDO::PARAM_STR);
+    // on rattache la valeur correspondante au marqueur nominatif
+    // bindParam(le_marqueur, sa_valeur, son_type)
+    // PDO::PARAM_STR explique que la valeur doit être traitée comme une chaine
+    $resultat->execute();
+    // on execute la requete
+
+    $infos = $resultat->fetchAll(PDO::FETCH_ASSOC);
+    echo '<pre>'; print_r($infos); echo '</pre>';
+
+
+
 
 
     ?>
